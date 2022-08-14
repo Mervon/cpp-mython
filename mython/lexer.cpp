@@ -269,7 +269,7 @@ const Token& Lexer::CurrentToken() const {
     return tokens_[current_token_];
 }
 
-Token Lexer::NextToken() {
+const Token& Lexer::NextToken() {
     if (current_token_ < max_token_) {
         return tokens_[++current_token_];
     } else {

@@ -96,7 +96,7 @@ public:
     [[nodiscard]] const Token& CurrentToken() const;
 
     // Возвращает следующий токен, либо token_type::Eof, если поток токенов закончился
-    Token NextToken();
+    const Token& NextToken();
 
     // Если текущий токен имеет тип T, метод возвращает ссылку на него.
     // В противном случае метод выбрасывает исключение LexerError

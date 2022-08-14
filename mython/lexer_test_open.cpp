@@ -1,5 +1,5 @@
 #include "lexer.h"
-#include "test_runner.h"
+#include "test_runner_p.h"
 
 #include <sstream>
 #include <string>
@@ -46,7 +46,7 @@ void TestNumbers() {
 
     ASSERT_EQUAL(lexer.CurrentToken(), Token(token_type::Number{42}));
     ASSERT_EQUAL(lexer.NextToken(), Token(token_type::Number{15}));
-    // Отрицательные числа формируются на этапе синтаксического анализа
+    // РћС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рµ С‡РёСЃР»Р° С„РѕСЂРјРёСЂСѓСЋС‚СЃСЏ РЅР° СЌС‚Р°РїРµ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРѕРіРѕ Р°РЅР°Р»РёР·Р°
     ASSERT_EQUAL(lexer.NextToken(), Token(token_type::Char{'-'}));
     ASSERT_EQUAL(lexer.NextToken(), Token(token_type::Number{53}));
 }
@@ -163,8 +163,8 @@ x = 1
     ASSERT_EQUAL(lexer.NextToken(), Token(token_type::Char{'='}));
     ASSERT_EQUAL(lexer.NextToken(), Token(token_type::Number{2}));
     ASSERT_EQUAL(lexer.NextToken(), Token(token_type::Newline{}));
-    // Пустая строка, состоящая только из пробельных символов не меняет текущий отступ,
-    // поэтому следующая лексема — это Id, а не Dedent
+    // РџСѓСЃС‚Р°СЏ СЃС‚СЂРѕРєР°, СЃРѕСЃС‚РѕСЏС‰Р°СЏ С‚РѕР»СЊРєРѕ РёР· РїСЂРѕР±РµР»СЊРЅС‹С… СЃРёРјРІРѕР»РѕРІ РЅРµ РјРµРЅСЏРµС‚ С‚РµРєСѓС‰РёР№ РѕС‚СЃС‚СѓРї,
+    // РїРѕСЌС‚РѕРјСѓ СЃР»РµРґСѓСЋС‰Р°СЏ Р»РµРєСЃРµРјР° вЂ” СЌС‚Рѕ Id, Р° РЅРµ Dedent
     ASSERT_EQUAL(lexer.NextToken(), Token(token_type::Id{"z"s}));
     ASSERT_EQUAL(lexer.NextToken(), Token(token_type::Char{'='}));
     ASSERT_EQUAL(lexer.NextToken(), Token(token_type::Number{3}));
